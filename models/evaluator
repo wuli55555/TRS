@@ -1,0 +1,51 @@
+import torch.nn as nn
+import torch
+from opts import *
+import torch.nn.functional as F
+import numpy as np
+from torch import nn
+from einops.layers.torch import Rearrange
+
+
+class FeedForward(nn.Module):
+    def __init__(self, dim, hidden_dim, dropout = 0.):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(dim, hidden_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, dim),
+            nn.Dropout(dropout)
+        )
+    def forward(self, x):
+        return self.net(x)
+
+
+class MLP_block(nn.Module):
+
+    def __init__(self, output_dim):
+        super(MLP_block, self).__init__()
+        self.activation = nn.ReLU()
+        self.layer1 = nn.Linear(1024, 256)
+        self.layer2 = nn.Linear(256, 128)
+        self.layer3 = nn.Linear(128, output_dim)
+
+    def forward(self, x):
+        x = self.activation(self.layer1(x))
+        x = self.activation(self.layer2(x))
+        output = self.layer3(x)
+        return output
+
+
+
+class Evaluator(nn.Module):
+
+    def __init__(self, output_dim):
+        super(Evaluator, self).__init__()
+        self.evaluator = MLP_block(output_dim)
+
+    def forward(self, feats_avg):
+        probs = self.evaluator(feats_avg)
+        return probs
+
+
