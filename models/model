@@ -9,7 +9,7 @@ class TRS(nn.Module):
         super(TRS, self).__init__()
         self.feature_dim = feature_dim
         self.i3d = InceptionI3d()
-        self.evaluator = MLPMixer(depth=8, num_classes=2, token_dim=512, channel_dim= 2048)
+        self.evaluator = MLPMixer(depth=8, num_classes=2, token_dim=512, channel_dim=2048)
         self.evaluator_r = Evaluator_relative(output_dim=2)
 
     def forward(self, x, xr=None, use_relative=True, predict=False):
@@ -29,12 +29,12 @@ class TRS(nn.Module):
                 clip_feats_c[:, i] = self.i3d(xr[:, :, 10 * i:10 * i + 16, :, :]).squeeze(2)
             clip_feats_c[:, 9] = self.i3d(xr[:, :, -16:, :, :]).squeeze(2)
 
-            relative_probs = self.evaluator_r(clip_feats,clip_feats_c)
+            relative_probs = self.evaluator_r(clip_feats, clip_feats_c)
 
             if  predict:
                 return probs, relative_probs
             else:
-                relative_probs2 = self.evaluator_r(clip_feats_c,clip_feats)
+                relative_probs2 = self.evaluator_r(clip_feats_c, clip_feats)
                 probs_c = self.evaluator(clip_feats_c)
                 return probs, probs_c, relative_probs, relative_probs2
         else:
