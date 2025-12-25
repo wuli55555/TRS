@@ -66,7 +66,7 @@ python -u main.py --gpu 0 --exp 1
  
 
 ## Acknowledgement
-Our evaluation code is build upon [USDL](https://github.com/nzl-thu/MUSDL), [CoRe](https://github.com/yuxumin/CoRe)). We acknowledge these team for their valuable contributions to the field of action quality assessment.
+Our evaluation code is build upon [USDL](https://github.com/nzl-thu/MUSDL), [CoRe](https://github.com/yuxumin/CoRe). We acknowledge these team for their valuable contributions to the field of action quality assessment.
 
 ## Citation
  
