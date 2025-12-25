@@ -36,10 +36,12 @@
 
 ## Results
  We utilize the Spearman’s rank correlation as an evaluation metric to assess the performance of our method under different labeled data.
+
+ 
  ![](img/results.png)
 
 ## Data Preparation
-1. Prepare [MTL-AQA](https://github.com/ParitoshParmar/MTL-AQA)) dataset.
+1. Prepare [MTL-AQA](https://github.com/ParitoshParmar/MTL-AQA) dataset.
     * Download the dataset from the link provided in [this repo](https://github.com/sujoyp/wtalc-pytorch).
 3.  Download the I3D backbone pretrained on Kinetics ([this repo](https://drive.google.com/file/d/1M_4hN-beZpa-eiYCvIE7hsORjF18LEYU/view)).
 2.  Unzip it under the  ```dataset/ ``` folder.
